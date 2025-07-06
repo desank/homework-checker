@@ -2,11 +2,25 @@ import argparse
 import re
 import sys
 import logging
-import os
-from ocr.tesseract import TesseractProcessor
+from paddleocr import PaddleOCR
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+class PaddleOcrProcessor:
+    def __init__(self):
+        logging.info("Initializing PaddleOCR processor.")
+        self.ocr = PaddleOCR(use_textline_orientation=True, lang='en')
+
+    def process_image(self, image_path):
+        logging.info(f"Running OCR on {image_path}")
+        result = self.ocr.ocr(image_path)  # Removed cls=True as it's not supported
+        # Extract text lines from result
+        lines = []
+        for line in result:
+            for box in line:
+                lines.append(box[1][0])
+        return '\n'.join(lines)
 
 def evaluate_expression(expr):
     logging.info(f"Evaluating expression: {expr}")
@@ -53,7 +67,7 @@ def main():
         args = parser.parse_args()
 
         print("Initializing the OCR engine. This may take a few moments on the first run...")
-        ocr_processor = TesseractProcessor()
+        ocr_processor = PaddleOcrProcessor()
 
         logging.info(f"Processing {args.image_path}...")
         extracted_text = ocr_processor.process_image(args.image_path)
@@ -90,7 +104,6 @@ def main():
                 # Try to be more intelligent about what is a math expression
                 if '=' in line and any(c in '+-*/' for c in line):
                      print(f"Could not evaluate: {line}")
-
 
         print("\n--- Summary ---")
         if total_count > 0:
