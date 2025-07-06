@@ -3,8 +3,7 @@ import re
 import sys
 import logging
 import os
-os.environ['HF_HUB_DISABLE_CERT_CHECK'] = '1'
-from ocr.pix2text import Pix2TextProcessor
+from ocr.tesseract import TesseractProcessor
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -54,7 +53,7 @@ def main():
         args = parser.parse_args()
 
         print("Initializing the OCR engine. This may take a few moments on the first run...")
-        ocr_processor = Pix2TextProcessor()
+        ocr_processor = TesseractProcessor()
 
         logging.info(f"Processing {args.image_path}...")
         extracted_text = ocr_processor.process_image(args.image_path)
