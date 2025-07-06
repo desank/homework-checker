@@ -2,15 +2,12 @@ import argparse
 import re
 import sys
 import logging
-from ocr.google_doc_ai import GoogleDocAiProcessor
+import os
+os.environ['HF_HUB_DISABLE_CERT_CHECK'] = '1'
+from ocr.pix2text import Pix2TextProcessor
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-# TODO: Replace with your GCP project details
-PROJECT_ID = "agentverse-fgyga"
-LOCATION = "us"  # e.g., "us" or "eu"
-PROCESSOR_ID = "65dfc50dd803238"
 
 def evaluate_expression(expr):
     logging.info(f"Evaluating expression: {expr}")
@@ -56,12 +53,8 @@ def main():
         parser.add_argument("image_path", help="The path to the scanned image file.")
         args = parser.parse_args()
 
-        # Initialize the OCR processor
-        ocr_processor = GoogleDocAiProcessor(
-            project_id=PROJECT_ID,
-            location=LOCATION,
-            processor_id=PROCESSOR_ID
-        )
+        print("Initializing the OCR engine. This may take a few moments on the first run...")
+        ocr_processor = Pix2TextProcessor()
 
         logging.info(f"Processing {args.image_path}...")
         extracted_text = ocr_processor.process_image(args.image_path)
