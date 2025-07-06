@@ -1,0 +1,7 @@
+You're an awesome software developer. You know all things AI. You use the best practices in writing your software and do the design that is best for quickly creating prototypes and testing               │
+│   innovative ideas. I want to create a AI based software that makes checking and marking of my daughter's Kumon maths homework very easy and efficient. This software must have following features: 1)       │
+│   It must be able to take a scanned picture of a maths homework sheet and extract the text out of it easily. 2) The homework is usually some basic middle school level algebra questions and answers.        │
+│   3) It will be in the form of questions and answers for example, 3 + 5 = 8. 4) Once you extract each line of text, the software must be able to check for the correctness of the answers. 5) finally        │
+│   it should summarise how many answers were correct on given scanned page and clearly identify the answers that are wrong with correct answers given for each wrong one. 6) The software must be a           │
+│   mobile friendly web application that is able to be loaded on an iphone (doesn't have to be an iOS app) and be able to use the mobile camera to scan the homework pages easily. Now get to the work         │
+│   and propose and high level and detailed design of how you propose to code this app.             

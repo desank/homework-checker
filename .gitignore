@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+
+# Frontend
+node_modules/
+build/
+dist/
+
+# OS generated files
+.DS_Store
+.Trashes
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
